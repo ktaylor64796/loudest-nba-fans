@@ -1,48 +1,116 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Loudness Index - RotoGrinders Edition</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { 
+            background-color: #1a1d21; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            color: #ffffff; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .chart-container { 
+            width: 95%; 
+            max-width: 800px; 
+            background: #24282d; 
+            padding: 20px; 
+            border-radius: 12px; 
+            border: 1px solid #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        h2 { 
+            text-align: center; 
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #bdc3c7;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
 
-<div style="background-color: #1a1d21; padding: 20px; border-radius: 8px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-    <canvas id="nbaLoudnessChart" width="400" height="250"></canvas>
+<div class="chart-container">
+    <h2>NBA Loudness Index</h2>
+    <p class="subtitle">Ranked by Attendance, Capacity %, and Arena Acoustics</p>
+    <canvas id="loudnessChart"></canvas>
 </div>
 
 <script>
-const ctx = document.getElementById('nbaLoudnessChart').getContext('2d');
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Sacramento', 'Utah', 'Phoenix', 'Portland', 'San Antonio', 'Toronto', 'Philadelphia', 'Washington', 'New York', 'New Orleans'],
-        datasets: [{
-            label: 'Loudness Index (0-100)',
-            data: [78.17, 76.92, 73.66, 73.37, 71.52, 69.39, 64.17, 63.88, 60.09, 58.9],
-            backgroundColor: function(context) {
-                const index = context.dataIndex;
-                return index === 0 ? '#27ae60' : '#3498db'; // Green for #1, Blue for others
-            },
-            borderRadius: 4
-        }]
-    },
-    options: {
-        indexAxis: 'y',
-        responsive: true,
-        plugins: {
-            legend: { display: false },
-            title: {
-                display: true,
-                text: 'Top 10 Loudest NBA Fanbases',
-                color: '#ffffff',
-                font: { size: 18, weight: 'bold' }
-            }
+    // Data is embedded directly for easy single-file hosting
+    const nbaData = [
+        { team: "Sacramento Kings", score: 78.17 },
+        { team: "Utah Jazz", score: 76.92 },
+        { team: "Phoenix Suns", score: 73.66 },
+        { team: "Portland Trail Blazers", score: 73.37 },
+        { team: "San Antonio Spurs", score: 71.52 },
+        { team: "Toronto Raptors", score: 69.39 },
+        { team: "Philadelphia 76ers", score: 64.17 },
+        { team: "Washington Wizards", score: 63.88 },
+        { team: "New York Knicks", score: 60.09 },
+        { team: "New Orleans Pelicans", score: 58.90 }
+    ];
+
+    const ctx = document.getElementById('loudnessChart').getContext('2d');
+    
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: nbaData.map(d => d.team),
+            datasets: [{
+                label: 'Loudness Score (0-100)',
+                data: nbaData.map(d => d.score),
+                // RG Green for #1, RG Blue for the rest
+                backgroundColor: (context) => context.dataIndex === 0 ? '#27ae60' : '#3498db',
+                hoverBackgroundColor: (context) => context.dataIndex === 0 ? '#2ecc71' : '#5dade2',
+                borderRadius: 6,
+                borderSkipped: false,
+            }]
         },
-        scales: {
-            x: {
-                grid: { color: '#333' },
-                ticks: { color: '#bdc3c7' },
-                max: 100
+        options: {
+            indexAxis: 'y', // Makes it a horizontal bar chart
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1a1d21',
+                    titleColor: '#ffffff',
+                    bodyColor: '#bdc3c7',
+                    borderColor: '#333',
+                    borderWidth: 1,
+                    displayColors: false
+                }
             },
-            y: {
-                grid: { display: false },
-                ticks: { color: '#ffffff', font: { weight: 'bold' } }
+            scales: {
+                x: {
+                    grid: { color: '#333', drawBorder: false },
+                    ticks: { color: '#bdc3c7', font: { size: 12 } },
+                    max: 100,
+                    title: { display: true, text: 'Index Score', color: '#7f8c8d' }
+                },
+                y: {
+                    grid: { display: false },
+                    ticks: { 
+                        color: '#ffffff', 
+                        font: { size: 13, weight: 'bold' } 
+                    }
+                }
             }
         }
-    }
-});
+    });
 </script>
+
+</body>
+</html>
