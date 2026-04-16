@@ -1,0 +1,48 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div style="background-color: #1a1d21; padding: 20px; border-radius: 8px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    <canvas id="nbaLoudnessChart" width="400" height="250"></canvas>
+</div>
+
+<script>
+const ctx = document.getElementById('nbaLoudnessChart').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Sacramento', 'Utah', 'Phoenix', 'Portland', 'San Antonio', 'Toronto', 'Philadelphia', 'Washington', 'New York', 'New Orleans'],
+        datasets: [{
+            label: 'Loudness Index (0-100)',
+            data: [78.17, 76.92, 73.66, 73.37, 71.52, 69.39, 64.17, 63.88, 60.09, 58.9],
+            backgroundColor: function(context) {
+                const index = context.dataIndex;
+                return index === 0 ? '#27ae60' : '#3498db'; // Green for #1, Blue for others
+            },
+            borderRadius: 4
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Top 10 Loudest NBA Fanbases',
+                color: '#ffffff',
+                font: { size: 18, weight: 'bold' }
+            }
+        },
+        scales: {
+            x: {
+                grid: { color: '#333' },
+                ticks: { color: '#bdc3c7' },
+                max: 100
+            },
+            y: {
+                grid: { display: false },
+                ticks: { color: '#ffffff', font: { weight: 'bold' } }
+            }
+        }
+    }
+});
+</script>
