@@ -3,110 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBA Loudness Index - RotoGrinders Edition</title>
+    <title>Top 5 Loudest NBA Fanbases - RotoGrinders</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { 
-            background-color: #1a1d21; 
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            color: #ffffff; 
+        :root {
+            --rg-dark: #1a1d21;
+            --rg-panel: #24282d;
+            --rg-green: #27ae60;
+            --rg-blue: #3498db;
+            --rg-text: #ffffff;
+            --rg-border: #3d434a;
+        }
+
+        body {
+            background-color: var(--rg-dark);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--rg-text);
             margin: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--rg-panel);
+            border-radius: 12px;
+            border: 1px solid var(--rg-border);
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            margin: 0 0 10px 0;
+            font-size: 26px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--rg-green);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .header-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 100px 100px 80px;
+            padding: 15px 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 12px;
+            color: #95a5a6;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .team-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 100px 100px 80px;
             align-items: center;
-            min-height: 100vh;
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--rg-border);
+            transition: background 0.2s;
         }
-        .chart-container { 
-            width: 95%; 
-            max-width: 800px; 
-            background: #24282d; 
-            padding: 20px; 
-            border-radius: 12px; 
-            border: 1px solid #333;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+
+        .team-row:hover {
+            background: rgba(255,255,255,0.03);
         }
-        h2 { 
-            text-align: center; 
-            font-size: 22px;
-            margin-bottom: 5px;
-            color: #ffffff;
-        }
-        p.subtitle {
-            text-align: center;
-            color: #bdc3c7;
+
+        .rank { font-weight: bold; font-size: 18px; color: var(--rg-green); }
+
+        .team-info { display: flex; align-items: center; gap: 15px; }
+        .team-logo { width: 40px; height: 40px; object-fit: contain; }
+        .team-names { display: flex; flex-direction: column; }
+        .team-name { font-weight: bold; font-size: 16px; }
+        .arena-name { font-size: 12px; color: #7f8c8d; }
+
+        .stat { font-family: 'Courier New', monospace; font-weight: bold; text-align: center; }
+        .index-badge {
+            background: var(--rg-green);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
             font-size: 14px;
-            margin-bottom: 25px;
         }
+
+        .chart-wrapper { margin-top: 30px; height: 300px; }
     </style>
 </head>
 <body>
 
-<div class="chart-container">
-    <h2>NBA Loudness Index</h2>
-    <p class="subtitle">Ranked by Attendance, Capacity %, and Arena Acoustics</p>
-    <canvas id="loudnessChart"></canvas>
+<div class="container">
+    <h2>The Top 5 Loudest NBA Fanbases</h2>
+    <p style="color: #bdc3c7; margin-bottom: 25px;">Data-driven rankings based on attendance, capacity, and arena acoustics.</p>
+
+    <div class="header-row">
+        <div>Rank</div>
+        <div>Team / Arena</div>
+        <div style="text-align: center;">Capacity %</div>
+        <div style="text-align: center;">Arch Score</div>
+        <div style="text-align: center;">Index</div>
+    </div>
+
+    <div class="team-row">
+        <div class="rank">1</div>
+        <div class="team-info">
+            <img class="team-logo" src="https://cdn.nba.com/logos/nba/1610612758/primary/L/logo.svg" alt="Kings">
+            <div class="team-names">
+                <span class="team-name">Sacramento Kings</span>
+                <span class="arena-name">Golden 1 Center</span>
+            </div>
+        </div>
+        <div class="stat">111.95%</div>
+        <div class="stat">20/30</div>
+        <div class="stat"><span class="index-badge">78.17</span></div>
+    </div>
+
+    <div class="team-row">
+        <div class="rank">2</div>
+        <div class="team-info">
+            <img class="team-logo" src="https://cdn.nba.com/logos/nba/1610612762/primary/L/logo.svg" alt="Jazz">
+            <div class="team-names">
+                <span class="team-name">Utah Jazz</span>
+                <span class="arena-name">Delta Center</span>
+            </div>
+        </div>
+        <div class="stat">108.40%</div>
+        <div class="stat">21/30</div>
+        <div class="stat"><span class="index-badge">76.92</span></div>
+    </div>
+
+    <div class="team-row">
+        <div class="rank">3</div>
+        <div class="team-info">
+            <img class="team-logo" src="https://cdn.nba.com/logos/nba/1610612756/primary/L/logo.svg" alt="Suns">
+            <div class="team-names">
+                <span class="team-name">Phoenix Suns</span>
+                <span class="arena-name">Footprint Center</span>
+            </div>
+        </div>
+        <div class="stat">113.83%</div>
+        <div class="stat">18/30</div>
+        <div class="stat"><span class="index-badge">73.66</span></div>
+    </div>
+
+    <div class="team-row">
+        <div class="rank">4</div>
+        <div class="team-info">
+            <img class="team-logo" src="https://cdn.nba.com/logos/nba/1610612757/primary/L/logo.svg" alt="Blazers">
+            <div class="team-names">
+                <span class="team-name">Portland Trail Blazers</span>
+                <span class="arena-name">Moda Center</span>
+            </div>
+        </div>
+        <div class="stat">103.44%</div>
+        <div class="stat">20/30</div>
+        <div class="stat"><span class="index-badge">73.37</span></div>
+    </div>
+
+    <div class="team-row" style="border-bottom: none;">
+        <div class="rank">5</div>
+        <div class="team-info">
+            <img class="team-logo" src="https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg" alt="Spurs">
+            <div class="team-names">
+                <span class="team-name">San Antonio Spurs</span>
+                <span class="arena-name">Frost Bank Center</span>
+            </div>
+        </div>
+        <div class="stat">107.80%</div>
+        <div class="stat">19/30</div>
+        <div class="stat"><span class="index-badge">71.52</span></div>
+    </div>
+
+    <div class="chart-wrapper">
+        <canvas id="loudnessChart"></canvas>
+    </div>
 </div>
 
 <script>
-    // Data is embedded directly for easy single-file hosting
-    const nbaData = [
-        { team: "Sacramento Kings", score: 78.17 },
-        { team: "Utah Jazz", score: 76.92 },
-        { team: "Phoenix Suns", score: 73.66 },
-        { team: "Portland Trail Blazers", score: 73.37 },
-        { team: "San Antonio Spurs", score: 71.52 },
-        { team: "Toronto Raptors", score: 69.39 },
-        { team: "Philadelphia 76ers", score: 64.17 },
-        { team: "Washington Wizards", score: 63.88 },
-        { team: "New York Knicks", score: 60.09 },
-        { team: "New Orleans Pelicans", score: 58.90 }
-    ];
-
     const ctx = document.getElementById('loudnessChart').getContext('2d');
-    
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: nbaData.map(d => d.team),
+            labels: ['Kings', 'Jazz', 'Suns', 'Blazers', 'Spurs'],
             datasets: [{
-                label: 'Loudness Score (0-100)',
-                data: nbaData.map(d => d.score),
-                // RG Green for #1, RG Blue for the rest
-                backgroundColor: (context) => context.dataIndex === 0 ? '#27ae60' : '#3498db',
-                hoverBackgroundColor: (context) => context.dataIndex === 0 ? '#2ecc71' : '#5dade2',
-                borderRadius: 6,
-                borderSkipped: false,
+                label: 'Loudness Index',
+                data: [78.17, 76.92, 73.66, 73.37, 71.52],
+                backgroundColor: ['#27ae60', '#3498db', '#3498db', '#3498db', '#3498db'],
+                borderRadius: 8
             }]
         },
         options: {
-            indexAxis: 'y', // Makes it a horizontal bar chart
             responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: '#1a1d21',
-                    titleColor: '#ffffff',
-                    bodyColor: '#bdc3c7',
-                    borderColor: '#333',
-                    borderWidth: 1,
-                    displayColors: false
-                }
-            },
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
             scales: {
-                x: {
-                    grid: { color: '#333', drawBorder: false },
-                    ticks: { color: '#bdc3c7', font: { size: 12 } },
-                    max: 100,
-                    title: { display: true, text: 'Index Score', color: '#7f8c8d' }
-                },
-                y: {
-                    grid: { display: false },
-                    ticks: { 
-                        color: '#ffffff', 
-                        font: { size: 13, weight: 'bold' } 
-                    }
-                }
+                y: { grid: { color: '#3d434a' }, ticks: { color: '#bdc3c7' }, min: 60 },
+                x: { ticks: { color: '#ffffff', font: { weight: 'bold' } } }
             }
         }
     });
