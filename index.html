@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top 5 Loudest NBA Fanbases - RotoGrinders</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --rg-dark: #1a1d21;
@@ -27,7 +26,7 @@
 
         .container {
             width: 100%;
-            max-width: 850px;
+            max-width: 900px;
             background: var(--rg-panel);
             border-radius: 12px;
             border: 1px solid var(--rg-border);
@@ -37,7 +36,7 @@
 
         h2 {
             margin: 0 0 10px 0;
-            font-size: 26px;
+            font-size: 24px;
             text-transform: uppercase;
             letter-spacing: 1px;
             border-bottom: 2px solid var(--rg-green);
@@ -47,22 +46,26 @@
 
         .header-row {
             display: grid;
-            grid-template-columns: 50px 1fr 100px 100px 80px;
+            grid-template-columns: 50px 1fr 100px 100px 120px 120px;
             padding: 15px 10px;
             background: rgba(255,255,255,0.05);
             border-radius: 6px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 11px;
             color: #95a5a6;
             text-transform: uppercase;
             margin-bottom: 10px;
+            text-align: center;
         }
+
+        /* Align the Team/Arena column to the left */
+        .header-row div:nth-child(2) { text-align: left; }
 
         .team-row {
             display: grid;
-            grid-template-columns: 50px 1fr 100px 100px 80px;
+            grid-template-columns: 50px 1fr 100px 100px 120px 120px;
             align-items: center;
-            padding: 12px 10px;
+            padding: 15px 10px;
             border-bottom: 1px solid var(--rg-border);
             transition: background 0.2s;
         }
@@ -71,38 +74,52 @@
             background: rgba(255,255,255,0.03);
         }
 
-        .rank { font-weight: bold; font-size: 18px; color: var(--rg-green); }
+        .rank { font-weight: bold; font-size: 18px; color: var(--rg-green); text-align: center; }
 
         .team-info { display: flex; align-items: center; gap: 15px; }
         .team-logo { width: 40px; height: 40px; object-fit: contain; }
         .team-names { display: flex; flex-direction: column; }
-        .team-name { font-weight: bold; font-size: 16px; }
-        .arena-name { font-size: 12px; color: #7f8c8d; }
+        .team-name { font-weight: bold; font-size: 15px; }
+        .arena-name { font-size: 11px; color: #7f8c8d; }
 
-        .stat { font-family: 'Courier New', monospace; font-weight: bold; text-align: center; }
+        .stat { font-family: 'Roboto Mono', monospace; font-weight: bold; text-align: center; font-size: 14px; }
+        
+        .index-label {
+            font-size: 10px;
+            display: block;
+            color: #bdc3c7;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
         .index-badge {
             background: var(--rg-green);
             color: white;
-            padding: 4px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 15px;
+            display: inline-block;
         }
 
-        .chart-wrapper { margin-top: 30px; height: 300px; }
+        .reddit-count {
+            color: #ff4500; /* Reddit Orange */
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>The Top 5 Loudest NBA Fanbases</h2>
-    <p style="color: #bdc3c7; margin-bottom: 25px;">Data-driven rankings based on attendance, capacity, and arena acoustics.</p>
+    <p style="color: #bdc3c7; margin-bottom: 25px; font-size: 14px;">Ranked by Attendance, Capacity, Arena Architecture, and Reddit Engagement.</p>
 
     <div class="header-row">
         <div>Rank</div>
         <div>Team / Arena</div>
-        <div style="text-align: center;">Capacity %</div>
-        <div style="text-align: center;">Arch Score</div>
-        <div style="text-align: center;">Index</div>
+        <div>Capacity %</div>
+        <div>Arch Score</div>
+        <div>Reddit Comments</div>
+        <div>Loudness Index (0-100)</div>
     </div>
 
     <div class="team-row">
@@ -116,7 +133,10 @@
         </div>
         <div class="stat">111.95%</div>
         <div class="stat">20/30</div>
-        <div class="stat"><span class="index-badge">78.17</span></div>
+        <div class="stat reddit-count">41,602</div>
+        <div class="stat">
+            <span class="index-badge">78.17</span>
+        </div>
     </div>
 
     <div class="team-row">
@@ -130,7 +150,10 @@
         </div>
         <div class="stat">108.40%</div>
         <div class="stat">21/30</div>
-        <div class="stat"><span class="index-badge">76.92</span></div>
+        <div class="stat reddit-count">29,346</div>
+        <div class="stat">
+            <span class="index-badge">76.92</span>
+        </div>
     </div>
 
     <div class="team-row">
@@ -144,7 +167,10 @@
         </div>
         <div class="stat">113.83%</div>
         <div class="stat">18/30</div>
-        <div class="stat"><span class="index-badge">73.66</span></div>
+        <div class="stat reddit-count">54,632</div>
+        <div class="stat">
+            <span class="index-badge">73.66</span>
+        </div>
     </div>
 
     <div class="team-row">
@@ -158,7 +184,10 @@
         </div>
         <div class="stat">103.44%</div>
         <div class="stat">20/30</div>
-        <div class="stat"><span class="index-badge">73.37</span></div>
+        <div class="stat reddit-count">36,231</div>
+        <div class="stat">
+            <span class="index-badge">73.37</span>
+        </div>
     </div>
 
     <div class="team-row" style="border-bottom: none;">
@@ -172,38 +201,13 @@
         </div>
         <div class="stat">107.80%</div>
         <div class="stat">19/30</div>
-        <div class="stat"><span class="index-badge">71.52</span></div>
+        <div class="stat reddit-count">36,983</div>
+        <div class="stat">
+            <span class="index-badge">71.52</span>
+        </div>
     </div>
 
-    <div class="chart-wrapper">
-        <canvas id="loudnessChart"></canvas>
-    </div>
 </div>
-
-<script>
-    const ctx = document.getElementById('loudnessChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Kings', 'Jazz', 'Suns', 'Blazers', 'Spurs'],
-            datasets: [{
-                label: 'Loudness Index',
-                data: [78.17, 76.92, 73.66, 73.37, 71.52],
-                backgroundColor: ['#27ae60', '#3498db', '#3498db', '#3498db', '#3498db'],
-                borderRadius: 8
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { grid: { color: '#3d434a' }, ticks: { color: '#bdc3c7' }, min: 60 },
-                x: { ticks: { color: '#ffffff', font: { weight: 'bold' } } }
-            }
-        }
-    });
-</script>
 
 </body>
 </html>
